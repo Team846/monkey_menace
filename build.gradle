@@ -112,7 +112,7 @@ spotless {
             exclude '**/build/**', '**/build-*/**'
         }
         def selectedClangVersion = project.hasProperty('fromCI') ? '17.0.6' : '18.1.8'
-        clangFormat(selectedClangVersion).style('Google')
+        clangFormat(selectedClangVersion).style('{ BasedOnStyle: Google, ColumnLimit: 80 }')
     }
     groovyGradle {
         target fileTree('src') {
