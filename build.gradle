@@ -126,7 +126,9 @@ spotless {
     }
 }
 
-check.dependsOn spotlessApply
+if (!project.hasProperty('fromCI')) {
+    check.dependsOn spotlessApply
+}
 
 task runCppcheck(type: Exec) {
     def outputBuffer = new ByteArrayOutputStream()
@@ -180,4 +182,6 @@ ${reportContent.trim()}
     }
 }
 
-check.dependsOn runCppcheck
+if (!project.hasProperty('fromCI')) {
+    check.dependsOn runCppcheck
+}
