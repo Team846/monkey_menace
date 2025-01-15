@@ -6,8 +6,8 @@ CoralWristSubsystem::CoralWristSubsystem()
     : frc846::robot::GenericSubsystem<CoralWristReadings, CoralWristTarget>(
           "coral_wrist"),
       motor_configs(GET_MOTOR_CONFIG("coral_wrist/coral_wrist_one_",
-          ports::coral_wrist_::kCoralWristOne_CANID, frc846::wpilib::unit_ohm{0.0},
-          frc846::wpilib::unit_kg_m_sq{0.0})),
+          ports::coral_wrist_::kCoralWristOne_CANID,
+          frc846::wpilib::unit_ohm{0.0}, frc846::wpilib::unit_kg_m_sq{0.0})),
       coral_wrist_(frc846::control::base::MotorMonkeyType::SPARK_MAX_NEO550,
           motor_configs) {
   RegisterPreference("coral_wrist/coral_wrist_tolerance_", 0.25_in);
@@ -29,12 +29,12 @@ CoralWristTarget CoralWristSubsystem::ZeroTarget() const {
 }
 
 bool CoralWristSubsystem::VerifyHardware() {
-    bool ok = true;
+  bool ok = true;
 
-    FRC846_VERIFY(
-        coral_wrist_.VerifyConnected(), ok, "Coral Wrist not connected");
+  FRC846_VERIFY(
+      coral_wrist_.VerifyConnected(), ok, "Coral Wrist not connected");
 
-    return ok;
+  return ok;
   return true;
 }
 
