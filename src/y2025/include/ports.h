@@ -38,4 +38,8 @@ struct ports {
   struct telescope_ {
     static constexpr int kTelescopeOne_CANID = 16;
   };
+
+  struct coral_wrist_ {
+    static constexpr int kCoralWristOne_CANID = 16;
+  };
 };
