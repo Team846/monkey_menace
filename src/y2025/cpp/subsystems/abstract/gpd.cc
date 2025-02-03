@@ -70,6 +70,8 @@ std::vector<gp_track> GPDSubsystem::update(
       }
     }
   }
+
+  return tracks;
 }
 
 std::pair<frc846::math::Vector2D, bool> GPDSubsystem::getBestGP(
