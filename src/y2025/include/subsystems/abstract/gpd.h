@@ -18,6 +18,13 @@ struct GPDReadings {
   std::vector<frc846::math::Vector2D> gamepieces;
 };
 
+struct gp_track {
+  int id;                           // Unique identifier for the ball
+  frc846::math::Vector2D position;  // Last known position
+  int missedFrames;                 // Counter for missed detections
+  bool inFrame;
+};
+
 class GPDSubsystem
     : public frc846::robot::GenericSubsystem<GPDReadings, GPDTarget> {
 public:
@@ -30,10 +37,18 @@ public:
 
   GPDTarget ZeroTarget() const override;
 
+  std::vector<gp_track> update(std::vector<frc846::math::Vector2D>& detections);
+
   bool VerifyHardware() override;
 
 private:
   frc::Field2d g_field;
+
+  const units::inch_t maxDistance = 50_in;
+  std::vector<gp_track> tracks;
+  int max_missed_frames = 2;
+
+  int nextId = 1;
 
   std::shared_ptr<nt::NetworkTable> gpdTable =
       nt::NetworkTableInstance::GetDefault().GetTable("GPDCam1");

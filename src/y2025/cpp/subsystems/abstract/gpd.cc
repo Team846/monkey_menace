@@ -30,6 +30,48 @@ bool GPDSubsystem::VerifyHardware() { return true; }
 
 void GPDSubsystem::Setup() {}
 
+std::vector<gp_track> GPDSubsystem::update(
+    std::vector<frc846::math::Vector2D>& detections) {
+  std::vector<bool> matched(detections.size(), false);
+  for (const auto& detection : detections) {
+    units::inch_t bestDistance = maxDistance;
+    int bestIndex = -1;
+    for (size_t i = 0; i < detections.size(); i++) {
+      units::inch_t dist = (detections[i] - detection).magnitude();
+      if (dist < bestDistance && !matched[i]) {
+        bestDistance = dist;
+        bestIndex = static_cast<int>(i);
+      }
+    }
+
+    if (bestIndex != -1) {
+      tracks[bestIndex].position = detection;
+      tracks[bestIndex].missedFrames = 0;
+      tracks[bestIndex].inFrame = true;
+      matched[bestIndex] = true;
+    } else {
+      gp_track newTrack;
+      newTrack.id = nextId++;
+      newTrack.position = detection;
+      newTrack.missedFrames = 0;
+      newTrack.inFrame = true;
+      tracks.push_back(newTrack);
+      matched.push_back(true);
+    }
+
+    for (size_t i = 0; i < tracks.size();) {
+      if (!matched[i]) { tracks[i].missedFrames++; }
+      // Remove track if missed for more than max_missed_frames
+      if (tracks[i].missedFrames > max_missed_frames) {
+        tracks.erase(tracks.begin() + i);
+        matched.erase(matched.begin() + i);
+      } else {
+        i++;
+      }
+    }
+  }
+}
+
 std::pair<frc846::math::Vector2D, bool> GPDSubsystem::getBestGP(
     const std::vector<frc846::math::Vector2D> algae) {
   if (algae.size() == 0U) { return {{0_in, 0_in}, false}; }
