@@ -22,7 +22,6 @@ struct gp_track {
   int id;                           // Unique identifier for the ball
   frc846::math::Vector2D position;  // Last known position
   int missedFrames;                 // Counter for missed detections
-  bool inFrame;
 };
 
 class GPDSubsystem
@@ -44,7 +43,7 @@ public:
 private:
   frc::Field2d g_field;
 
-  const units::inch_t maxDistance = 50_in;
+  const units::inch_t maxDistance = 1000000_in;
   std::vector<gp_track> tracks;
   int max_missed_frames = 2;
 

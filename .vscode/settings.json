@@ -117,7 +117,8 @@
     "queue": "cpp",
     "expected": "cpp",
     "source_location": "cpp",
-    "version": "cpp"
+    "version": "cpp",
+    "__node_handle": "cpp"
   },
   "wpilib.useWindbgX": true,
   "C_Cpp.errorSquiggles": "enabled",

@@ -233,7 +233,7 @@ public:
   std::string toString() const {
     std::string output = "<";
     for (size_t i = 0; i < N; ++i) {
-      output += data[i];
+      output += data[i].template to<double>();
       if (i < N - 1) output += ", ";
     }
     output += ">";
