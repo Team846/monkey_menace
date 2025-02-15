@@ -1,6 +1,5 @@
 #include "frc846/control/HigherMotorController.h"
 
-#include "frc846/control/MotorMonkey.h"
 #include "frc846/control/calculators/CurrentTorqueCalculator.h"
 
 namespace frc846::control {
@@ -147,6 +146,10 @@ void HigherMotorController::OverrideStatusFramePeriod(
     frc846::control::config::StatusFrame frame, units::millisecond_t period) {
   frc846::control::MotorMonkey::OverrideStatusFramePeriod(
       slot_id_, frame, period);
+}
+
+void HigherMotorController::AddToOrchestra(ctre::phoenix6::Orchestra orch) {
+  frc846::control::MotorMonkey::AddToOrchestra(slot_id_, orch);
 }
 
 }  // namespace frc846::control

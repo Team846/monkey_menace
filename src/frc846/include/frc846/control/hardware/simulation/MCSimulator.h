@@ -111,6 +111,7 @@ public:
 
   void SetLoad(units::newton_meter_t load);
   void SetBatteryVoltage(units::volt_t voltage);
+  void AddToOrchestra(ctre::phoenix6::Orchestra orch) override {};
 
 private:
   frc846::control::base::MotorSpecs specs;

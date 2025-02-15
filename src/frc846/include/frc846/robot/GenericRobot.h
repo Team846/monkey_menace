@@ -7,6 +7,7 @@
 #include <hal/Types.h>
 #include <units/time.h>
 
+#include "frc846/control/MotorMonkey.h"
 #include "frc846/robot/GenericRobotContainer.h"
 
 namespace frc846::robot {

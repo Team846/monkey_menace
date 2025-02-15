@@ -504,6 +504,15 @@ void MotorMonkey::SetSoftLimits(size_t slot_id, units::radian_t forward_limit,
   LOG_IF_ERROR("SetSoftLimits");
 }
 
+void MotorMonkey::AddToOrchestra(
+    size_t slot_id, ctre::phoenix6::Orchestra orch) {
+  CHECK_SLOT_ID();
+
+  SMART_RETRY(
+      controller_registry[slot_id]->AddToOrchestra(orch), "AddToOrchestra");
+  LOG_IF_ERROR("AddToOrchestra");
+}
+
 std::string_view MotorMonkey::parseError(
     frc846::control::hardware::ControllerErrorCodes err) {
   switch (err) {

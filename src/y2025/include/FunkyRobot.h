@@ -24,4 +24,8 @@ private:
 
   frc::DigitalInput home_switch_{0};
   frc::DigitalInput coast_switch_{1};
+
+  ctre::phoenix6::Orchestra jurassicOrch{};
+
+  int counter;
 };

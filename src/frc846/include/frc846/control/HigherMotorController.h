@@ -5,6 +5,7 @@
 #include <optional>
 #include <vector>
 
+#include "frc846/control/MotorMonkey.h"
 #include "frc846/control/base/motor_control_base.h"
 #include "frc846/control/base/motor_gains.h"
 #include "frc846/control/base/motor_specs.h"
@@ -117,6 +118,8 @@ public:
 
   // Verifies if the speed controller is connected and accessible
   bool VerifyConnected();
+
+  void AddToOrchestra(ctre::phoenix6::Orchestra orch);
 
 private:
   frc846::control::base::MotorMonkeyType mmtype_;

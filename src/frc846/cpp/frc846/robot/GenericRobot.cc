@@ -15,7 +15,6 @@
 #include "frc2/command/ParallelDeadlineGroup.h"
 #include "frc2/command/WaitCommand.h"
 #include "frc846/base/Loggable.h"
-#include "frc846/control/MotorMonkey.h"
 #include "frc846/robot/GenericCommand.h"
 #include "frc846/wpilib/NTAction.h"
 #include "frc846/wpilib/time.h"

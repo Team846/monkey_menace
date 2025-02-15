@@ -23,12 +23,12 @@ void ControlTriggerInitializer::InitTeleopTriggers(RobotContainer& container) {
     return container.control_input_.GetReadings().lock_left_reef;
   }}.WhileTrue(ReefAutoAlignCommand{
       container, true, 5_fps, 15_fps_sq, 15_fps_sq}
-                   .ToPtr());
+          .ToPtr());
   frc2::Trigger{[&] {
     return container.control_input_.GetReadings().lock_right_reef;
   }}.WhileTrue(ReefAutoAlignCommand{
       container, false, 5_fps, 15_fps_sq, 15_fps_sq}
-                   .ToPtr());
+          .ToPtr());
 
   frc2::Trigger{[&] {
     return container.control_input_.GetReadings().targeting_algae &&

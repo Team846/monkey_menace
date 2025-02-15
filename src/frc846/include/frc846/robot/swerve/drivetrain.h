@@ -91,6 +91,8 @@ public:
 
   units::degrees_per_second_t ApplyBearingPID(units::degree_t target_bearing);
 
+  std::array<SwerveModuleSubsystem*, 4> GetModules() { return modules_; };
+
 private:
   DrivetrainReadings ReadFromHardware() override;
 

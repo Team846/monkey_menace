@@ -1,4 +1,5 @@
 #include "frc846/control/hardware/TalonFX_interm.h"
+#include <iostream>
 
 namespace frc846::control::hardware {
 
@@ -268,6 +269,11 @@ frc846::control::hardware::ControllerErrorCodes TalonFX_interm::getErrorCode(
     return ControllerErrorCodes::kError;
   }
   return ControllerErrorCodes::kAllOK;
+}
+
+void TalonFX_interm::AddToOrchestra(ctre::phoenix6::Orchestra orch) {
+  orch.AddInstrument(talon_);
+  std::cout<<orch.IsPlaying()<<std::endl;
 }
 
 }  // namespace frc846::control::hardware

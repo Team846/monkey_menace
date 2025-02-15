@@ -93,6 +93,9 @@ public:
   */
   void SetSteerGains(frc846::control::base::MotorGains gains);
 
+  frc846::control::HigherMotorController GetDrive() { return drive_; };
+  frc846::control::HigherMotorController GetSteer() { return steer_; };
+
 private:
   int last_rezero = 101;
 

@@ -135,6 +135,8 @@ public:
 
   static bool VerifyConnected();
 
+  static void AddToOrchestra(size_t slot_id, ctre::phoenix6::Orchestra orch);
+
 private:
   static void RecalculateMaxDraw();
 

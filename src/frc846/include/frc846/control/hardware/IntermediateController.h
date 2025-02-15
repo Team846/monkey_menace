@@ -5,6 +5,7 @@
 #include <units/current.h>
 #include <units/voltage.h>
 
+#include <ctre/phoenix6/Orchestra.hpp>
 #include <vector>
 
 #include "frc846/control/base/motor_control_base.h"
@@ -83,6 +84,8 @@ public:
   virtual ControllerErrorCodes GetLastErrorCode() = 0;
 
   virtual bool VerifyConnected() = 0;
+
+  virtual void AddToOrchestra(ctre::phoenix6::Orchestra orch) = 0;
 };
 
 }  // namespace frc846::control::hardware

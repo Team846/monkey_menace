@@ -24,6 +24,9 @@
 #include "frc846/wpilib/NTAction.h"
 #include "rsighandler.h"
 #include "subsystems/hardware/leds_logic.h"
+#include <ctre/phoenix6/TalonFX.hpp>
+
+#include <iostream>
 
 FunkyRobot::FunkyRobot() : GenericRobot{&container_} {}
 
@@ -85,25 +88,55 @@ void FunkyRobot::OnPeriodic() {
   Graph("robot_cg_x", cg[0]);
   Graph("robot_cg_y", cg[1]);
   Graph("robot_cg_z", cg[2]);
+
+  if (counter>0){
+    counter--;
+    if (counter==0){
+      jurassicOrch.Play();
+      std::cout<<"hola"<<std::endl;
+    }
+  }
+
+  std::cout<<jurassicOrch.IsPlaying()<<std::endl;
+  // jurassicOrch.Play();
 }
 
 void FunkyRobot::InitTest() {
-  container_.drivetrain_.SetDefaultCommand(DriveCommand{container_});
-  container_.climber_.SetDefaultCommand(DinosaurClimberCommand{container_});
+  counter=10;
+  // container_.drivetrain_.SetDefaultCommand(DriveCommand{container_});
+  // container_.climber_.SetDefaultCommand(DinosaurClimberCommand{container_});
 
-  frc2::Trigger start_dinosaur_a([] { return true; });
-  start_dinosaur_a.WhileTrue(frc2::SequentialCommandGroup{
-      AlgalPositionCommand{container_, kAlgae_DINOSAUR_A, true},
-      frc2::WaitCommand{0.5_s},
-      AlgalPositionCommand{container_, kAlgae_DINOSAUR_B, true},
-      frc2::WaitCommand{0.5_s}}.Repeatedly());
+  // frc2::Trigger start_dinosaur_a([] { return true; });
+  // start_dinosaur_a.WhileTrue(frc2::SequentialCommandGroup{
+  //     AlgalPositionCommand{container_, kAlgae_DINOSAUR_A, true},
+  //     frc2::WaitCommand{0.5_s},
+  //     AlgalPositionCommand{container_, kAlgae_DINOSAUR_B, true},
+  //     frc2::WaitCommand{0.5_s}}.Repeatedly());
 
-  frc2::Trigger start_dinosaur_c([] { return true; });
-  start_dinosaur_c.WhileTrue(frc2::SequentialCommandGroup{
-      CoralPositionCommand{container_, kCoral_DINOSAUR_A, true},
-      frc2::WaitCommand{0.5_s},
-      CoralPositionCommand{container_, kCoral_DINOSAUR_B, true},
-      frc2::WaitCommand{0.5_s}}.Repeatedly());
+  // frc2::Trigger start_dinosaur_c([] { return true; });
+  // start_dinosaur_c.WhileTrue(frc2::SequentialCommandGroup{
+  //     CoralPositionCommand{container_, kCoral_DINOSAUR_A, true},
+  //     frc2::WaitCommand{0.5_s},
+  //     CoralPositionCommand{container_, kCoral_DINOSAUR_B, true},
+  //     frc2::WaitCommand{0.5_s}}.Repeatedly());
+
+  frc2::Trigger start_chirp([] { return true; });
+
+  std::cout<<"hola como muy bien estas"<<std::endl;
+
+  
+  std::cout<<"hola como estas"<<std::endl;
+  jurassicOrch.LoadMusic("jurassic.chrp");
+      // ctre::phoenix6::Orchestra("jurassic.chrp");
+  // std::array<frc846::robot::swerve::SwerveModuleSubsystem*, 4> swerves =
+  //     container_.drivetrain_.GetModules();
+  // for (frc846::robot::swerve::SwerveModuleSubsystem* swerve : swerves) {
+  //   swerve->GetDrive().AddToOrchestra(jurassicOrch);
+  //   swerve->GetSteer().AddToOrchestra(jurassicOrch);
+  // }
+  ctre::phoenix6::hardware::TalonFX talon = ctre::phoenix6::hardware::TalonFX(2);
+  jurassicOrch.AddInstrument(talon);
+  // jurassicOrch.Play();
 }
 
 #ifndef RUNNING_FRC_TESTS

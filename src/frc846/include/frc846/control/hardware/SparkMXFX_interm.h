@@ -250,6 +250,8 @@ public:
   */
   ControllerErrorCodes GetLastErrorCode() override;
 
+  void AddToOrchestra(ctre::phoenix6::Orchestra orch) override {};
+
 private:
   frc846::control::hardware::ControllerErrorCodes getErrorCode(
       rev::REVLibError code);
