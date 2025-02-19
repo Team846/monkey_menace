@@ -23,5 +23,12 @@ public:
   */
   static int getClosestReefSide(frc846::math::Vector2D current_pos);
 
+  /*
+  getAlgaeStoredLocation()
+
+  Returns the location of the algae stored in the reef (0,1) or (L2, L3).
+  */
+  static int getAlgaeStoredLocation(frc846::math::Vector2D current_pos);
+
   static frc846::math::FieldPoint reefPoint;
 };

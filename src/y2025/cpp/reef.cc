@@ -64,3 +64,18 @@ int ReefProvider::getClosestReefSide(frc846::math::Vector2D current_pos) {
 
   return 0;
 }
+
+int ReefProvider::getAlgaeStoredLocation(frc846::math::Vector2D current_pos) {
+  int closestReefSide = ReefProvider::getClosestReefSide(current_pos);
+
+  switch (closestReefSide) {
+  case 0:
+  case 2:
+  case 4: return 0;
+  case 1:
+  case 3:
+  case 5: return 1;
+  }
+
+  return 0;
+}
